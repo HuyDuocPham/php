@@ -1,0 +1,19 @@
+I, dowmload XAMMPP
+	ktra version: cmd: php -v
+	skype:
+	http://localhost:8081/
+	1, update PHP ver 8.1.17 : https://www.apachefriends.org/download.html
+	
+II, 
+	1, xampp --> start Apache
+	2, xampp --> htdocs --> create new folder
+	3, vs code --> open folder
+III,
+	1, Chay file php: localhost/nameFolder/nameFile
+	2, set link: 	
+		xammpp --> conflig --> httpd.conf --> search : directoryIndex
+
+	
+
+
+
