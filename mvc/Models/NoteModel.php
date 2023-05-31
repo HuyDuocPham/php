@@ -22,6 +22,15 @@ class NoteModel extends BaseModel
     {
         return $this->delete($id, self::TABLE);
     }
+    public function update($data, $id)
+    {
+        return $this->updateNew($data, self::TABLE, $id);
+    }
+
+    public function logIn($email, $password)
+    {
+        return $this->checkLogIn($email, $password);
+    }
 
 }
 ?>

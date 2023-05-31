@@ -5,10 +5,10 @@
     <?php echo showErrors($errors ?? [], 'user_id'); ?>
     <select name="user_id">
         <option value="0">-- Select options --</option>
-        <option value="1">1. Nguyen Van A</option>
-        <option value="2">2. Nguyen Van B</option>
-        <option value="3">3. Nguyen Van C</option>
+        <?php foreach ($users as $key => $user): ?>
+            <option value="<?= $user['id'] ?>"><?= $user['id'] . '-' . $user['name'] ?></option>
+        <?php endforeach ?>
     </select> <br>
     <?php echo showErrors($errors ?? [], 'user_id'); ?>
-    <input type="submit" value="Update" name="create_note">
+    <input type="submit" value="Create" name="create_note">
 </form>

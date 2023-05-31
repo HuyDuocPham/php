@@ -7,6 +7,10 @@ class NoteController extends BaseController
     {
         $this->loadModel('NoteModel.php');
         $this->noteModel = new NoteModel;
+
+        //get recors table user
+        $this->loadModel('UserModel.php');
+        $this->noteModel = new UserModel;
     }
     public function index()
     {
@@ -15,9 +19,10 @@ class NoteController extends BaseController
     }
     public function create()
     {
+        $errors = [];
         if (isset($_POST['create_note'])) {
             //validate input
-            $errors = [];
+
             if (strlen(trim($_POST['content'])) === 0) {
                 $errors['content'][] = 'Content is required';
             }
@@ -41,12 +46,45 @@ class NoteController extends BaseController
                 throw new \Exception('Create note something went wrong !');
             }
         }
-        return $this->view('note.create_note');
+
+        //get all records table user;
+        $users = $this->userModel->getList();
+
+        return $this->view('note.create_note', ['users' => $users]);
     }
 
     public function detail($id)
     {
+        $errors = [];
+        if (isset($_POST['update_note'])) {
+            //validate input
+
+            if (strlen(trim($_POST['content'])) === 0) {
+                $errors['content'][] = 'Content is required';
+            }
+            if ($_POST['user_id'] === '0') {
+                $errors['user_id'][] = 'User Id is required';
+            }
+
+            if (count($errors) > 0) {
+                return $this->view('note.detail_note', ['errors' => $errors]);
+            }
+
+            //Fresh Data
+            $data = [
+                'content' => $_POST['content'],
+                'user_id' => $_POST['user_id']
+            ];
+            $id = $_POST['id'];
+            $check = $this->noteModel->update($data, $id);
+            if ($check) {
+                header('Location: ' . URL . '?url=note/index');
+            } else {
+                throw new \Exception('Create note something went wrong !');
+            }
+        }
         $note = $this->noteModel->getDetail($id);
+
         return $this->view('note.detail_note', ['note' => $note]);
     }
 

@@ -45,5 +45,31 @@ class BaseModel
         $sql = "DELETE FROM $table WHERE id = $id";
         return mysqli_query($this->connect, $sql);
     }
+
+    public function updateNew($arrayData, $table = 'user', $id)
+    {
+        $list = [];
+        foreach ($arrayData as $key => $value) {
+            $list[] = "$key ='" . $value . "'";
+        }
+        $listData = implode(',', $list);
+        $sql = "UPDATE $table set $listData WHERE id = $id";
+        return mysqli_query($this->connect, $sql);
+    }
+
+    public function checkUserExits($table, $email)
+    {
+        $sql = "SELECT * FROM $table WHERE email = '$email'";
+        $query = mysqli_query($this->connect, $sql);
+        $rows = mysqli_num_rows($query);
+        return $rows;
+    }
+
+    public function checkLogIn($username, $password) {
+
+    }
+ 
+
+
 }
 ?>

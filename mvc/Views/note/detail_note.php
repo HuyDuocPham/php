@@ -10,5 +10,6 @@
         <option value="3" <?php echo $note['user_id'] == 3 ? 'selected' : '' ?>>3. Nguyen Van C</option>
     </select> <br>
     <?php echo showErrors($errors ?? [], 'user_id'); ?>
-    <input type="submit" value="Update" name="create_note">
+    <input type="hidden" name="id" value="<?= $note['id'] ?>">
+    <input type="submit" value="Update" name="update_note">
 </form>

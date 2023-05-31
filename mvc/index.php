@@ -13,7 +13,7 @@
     <h1>Trang Chủ</h1>
 
     <?php
-    define('URL', 'http://localhost/mvc/mvc/index.php');
+    define('URL', 'http://localhost/php/mvc/index.php');
     require './Helpers/helper.php';
     require './Controllers/BaseController.php';
     require './Core/App.php';

@@ -1,22 +1,36 @@
 <?php
-class UserModel
+class UserModel extends BaseModel
 {
-    public function getListProductHot()
+    const TABLE = 'user';
+    public function getList()
     {
-        return [
-            ['id' => 1, 'name' => 'Iphone 12'],
-            ['id' => 2, 'name' => 'Iphone 13'],
-            ['id' => 3, 'name' => 'Iphone 14'],
-        ];
+        $datas = $this->all(self::TABLE);
+        return $datas;
     }
 
-    public function getListProductNewArrival()
+    public function getDetail($id)
     {
-        return [
-            ['id' => 4, 'name' => 'Iphone 2'],
-            ['id' => 5, 'name' => 'Iphone 3'],
-            ['id' => 6, 'name' => 'Iphone 4'],
-        ];
+        return $this->find(self::TABLE, $id);
     }
+
+    public function store($data)
+    {
+        return $this->create($data, self::TABLE);
+    }
+
+    public function destroy($id)
+    {
+        return $this->delete($id, self::TABLE);
+    }
+    public function update($data, $id)
+    {
+        return $this->updateNew($data, self::TABLE, $id);
+    }
+    public function checkUser($email)
+    {
+        $data = $this->checkUserExits(self::TABLE, $email);
+        return $data;
+    }
+
 }
 ?>
