@@ -13,7 +13,8 @@ class NoteController extends BaseController
     }
     public function index()
     {
-        $notes = $this->noteModel->getList();
+        $userId = $_SESSION['id'] ?? null;
+        $notes = $this->noteModel->getListByUserId($userId);
         return $this->view('note.list_note', ['notes' => $notes]);
     }
     public function create()
@@ -83,8 +84,16 @@ class NoteController extends BaseController
             }
         }
         $note = $this->noteModel->getDetail($id);
+        if (is_null($note)) {
+            return $this->view('pages.404');
+        }
 
-        return $this->view('note.detail_note', ['note' => $note]);
+        $userId = $_SESSION['id'] ?? null;
+        if ($userId == $note['user_id']) {
+            return $this->view('note.detail_note', ['note' => $note]);
+        } else {
+            return $this->view('pages.403');
+        }
     }
 
     public function delete($id)

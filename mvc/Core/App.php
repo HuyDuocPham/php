@@ -28,8 +28,6 @@ class App
                 $this->params = $url[2];
             }
 
-
-
             $controllerObj = new $this->controller();
             $action = $this->action;
             $controllerObj->$action($this->params);

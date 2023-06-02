@@ -32,5 +32,10 @@ class NoteModel extends BaseModel
         return $this->checkLogIn($email, $password);
     }
 
+    public function getListByUserId($userId)
+    {
+        return $this->allHasUserId($userId, self::TABLE);
+    }
+
 }
 ?>

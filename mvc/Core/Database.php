@@ -9,7 +9,6 @@ class Database
 
     private $connect;
 
-
     public function connect()
     {
         try {

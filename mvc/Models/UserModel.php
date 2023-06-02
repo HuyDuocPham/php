@@ -32,5 +32,10 @@ class UserModel extends BaseModel
         return $data;
     }
 
+    public function attempLogin($email, $password)
+    {
+        return $this->checkLogin($email, $password);
+    }
+
 }
 ?>

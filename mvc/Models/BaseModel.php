@@ -9,6 +9,19 @@ class BaseModel
         $this->connect = $db->connect();
     }
 
+    public function allHasUserId($userId, $table = 'note')
+    {
+        if (is_null($userId)) {
+            return [];
+        }
+        $sql = "SELECT * FROM $table WHERE user_id = $userId";
+        $result = mysqli_query($this->connect, $sql);
+        $datas = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $datas[] = $row;
+        }
+        return $datas;
+    }
     public function all($table = 'note')
     {
         $sql = "SELECT * FROM $table";
@@ -65,10 +78,19 @@ class BaseModel
         return $rows;
     }
 
-    public function checkLogIn($username, $password) {
-
+    public function checkLogin($email, $password)
+    {
+        $sql = "SELECT * from user where email = '" . $email . "' and password = '" . $password . "'";
+        $result = mysqli_query($this->connect, $sql);
+        $rows = mysqli_num_rows($result);
+        if ($rows === 1) {
+            $user = mysqli_fetch_assoc($result);
+            $_SESSION['id'] = $user['id'];
+            return true;
+        }
+        return false;
     }
- 
+
 
 
 }

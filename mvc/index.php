@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,10 +31,14 @@
 
     <a href="index.php?url=user/index">List User</a><br>
     <a href="index.php?url=user/create">Create User</a><br>
+    <a href="index.php?url=user/login">Log In</a><br>
+
     <a href="index.php?url=product_category/index">List Product Category</a><br>
     <a href="index.php?url=product_category/create">Create Product Category</a><br>
+
     <a href="index.php?url=product/index">List Products</a><br>
     <a href="index.php?url=product/create">Create Products</a><br>
+
     <a href="index.php?url=note/index">List Note</a><br>
     <a href="index.php?url=note/create">Create Note</a><br>
 </body>

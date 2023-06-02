@@ -57,21 +57,31 @@ class UserController extends BaseController
         return $this->view('user.create_user', ['errors' => $errors]);
     }
 
-    
 
 
 
-    public function logIn()
+
+    public function login()
     {
         if (isset($_POST['login'])) {
-            $username = $_POST['name'] ?? null;
+            $username = $_POST['email'] ?? null;
             $password = $_POST['password'] ?? null;
 
-            $check = $this->userModel->checkLogIn($username, $password);
-            if ($check) {
+            $username = trim($username);
+            $username = htmlspecialchars($username);
+            $username = strip_tags($username);
 
+            $password = sha1($password . 'huyduocphamm!@#$%#');
+
+            $check = $this->userModel->attempLogin($username, $password);
+            if ($check) {
+                header('Location: ' . URL . '?url=user/index');
+            } else {
+                $errors['password'][] = 'User name or password is invalid';
+                return $this->view('user.login', ['errors' => $errors]);
             }
         }
+        return $this->view('user.login');
     }
 }
 ?>
