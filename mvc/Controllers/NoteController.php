@@ -3,14 +3,13 @@
 class NoteController extends BaseController
 {
     private $noteModel;
+    private $userModel;
     public function __construct()
     {
         $this->loadModel('NoteModel.php');
-        $this->noteModel = new NoteModel;
-
-        //get recors table user
         $this->loadModel('UserModel.php');
-        $this->noteModel = new UserModel;
+        $this->noteModel = new NoteModel;
+        $this->userModel = new UserModel;
     }
     public function index()
     {
@@ -45,8 +44,8 @@ class NoteController extends BaseController
             } else {
                 throw new \Exception('Create note something went wrong !');
             }
-        }
 
+        }
         //get all records table user;
         $users = $this->userModel->getList();
 

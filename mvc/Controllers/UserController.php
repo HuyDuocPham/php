@@ -49,14 +49,17 @@ class UserController extends BaseController
 
             $check = $this->userModel->store($data);
             if ($check) {
-                header('Location: ' . URL . '?url=note/index');
+                header('Location: ' . URL . '?url=user/index');
             } else {
                 throw new \Exception('Create user something went wrong !');
             }
         }
-
         return $this->view('user.create_user', ['errors' => $errors]);
     }
+
+    
+
+
 
     public function logIn()
     {
@@ -64,8 +67,8 @@ class UserController extends BaseController
             $username = $_POST['name'] ?? null;
             $password = $_POST['password'] ?? null;
 
-            $check = $this->userModel->checkLogIn($username, $password) ;
-            if($check) {
+            $check = $this->userModel->checkLogIn($username, $password);
+            if ($check) {
 
             }
         }
